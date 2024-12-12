@@ -1,0 +1,827 @@
+<html><head><base href="https://dummy-confernce.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Conference on Next Generation Computing</title>
+<style>
+  :root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --light: #ecf0f1;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--primary);
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .header p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .circuit-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  nav {
+    background: var(--primary);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: var(--secondary);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+  }
+
+  .important-dates {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+
+  .date-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .cta-button {
+   
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    background: #c0392b;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .committee-member {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .committee-member:hover {
+    transform: translateY(-5px);
+  }
+
+  .committee-member h3 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .committee-member p {
+    font-size: 0.9rem;
+    color: var(--primary);
+  }
+
+  .committee-role {
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .submission-form {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+
+  .submit-btn {
+    background: var(--secondary);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+
+  .submit-btn:hover {
+    background: #2980b9;
+  }
+
+  .loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .alert {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  .author-widget {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .author-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .form-subgroup {
+    margin-bottom: 1rem;
+  }
+
+  .secondary-btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .secondary-btn:hover {
+    background: var(--secondary);
+  }
+
+  .author-widget h5 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+
+  .remove-author {
+    background: var(--accent);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    float: right;
+  }
+
+  .fee-table {
+    margin: 2rem 0;
+    background: var(--light);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .fee-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .fee-row:last-child {
+    border-bottom: none;
+  }
+
+  .fee-category {
+    font-weight: 500;
+  }
+
+  .fee-amount {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .registration-info {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .registration-form {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+  .cta-button{
+    /* margin-left: 50%; */
+    
+    text-align: center;
+    position: relative;
+    
+  }
+
+  select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    background-color: white;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+ 
+
+<header class="header">
+  <svg class="circuit-bg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,10 L90,10 M10,50 L90,50 M10,90 L90,90" stroke="white" stroke-width="0.5"/>
+    <circle cx="50" cy="50" r="5" fill="white"/>
+    <circle cx="20" cy="20" r="3" fill="white"/>
+    <circle cx="80" cy="80" r="3" fill="white"/>
+  </svg>
+  <h1>International Conference on Next Generation Computing</h1>
+  <p>Exploring the Future of Computing Technologies</p>
+  
+</header>
+<div id="cta-button" class="cta-button"><a onclick="scrollToSection('registration')" >Register Now</a></div>
+
+
+<nav>
+  <ul>
+    <li><a onclick="scrollToSection('about')">About</a></li>
+    <li><a onclick="scrollToSection('call-for-papers')">Call for Papers</a></li>
+    <li><a onclick="scrollToSection('important-dates')">Important Dates</a></li>
+    <li><a onclick="scrollToSection('registration')">Registration</a></li>
+    <li><a onclick="scrollToSection('committee')">Committee</a></li>
+    <li><a onclick="scrollToSection('Keynote')">Keynote Speakers</a></li>
+    <li><a onclick="scrollToSection('venue')">Venue</a></li>
+  </ul>
+</nav>
+<script>
+  function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  window.scrollTo({
+    top: section.offsetTop,
+    behavior: 'smooth'
+  });
+}
+
+  </script>
+
+<div class="main-content">
+  <section id="about" class="section">
+    <h2>About the Conference</h2>
+    <p>The International Conference on Next Generation Computing (ICNGC-2025) brings together researchers, practitioners, and industry experts to share cutting-edge developments in computing technologies. The conference will feature plenary lectures and parallel sessions. This event aims to provide a platform for postgraduate students, researchers, aspiring engineers, and academicians to present their research findings, exchange ideas, and share perspectives within their respective fields. All accepted and presented papers are expected to be published in Scopus-indexed proceedings. Join us for three days of inspiring talks, workshops, and networking opportunities.
+</p>
+  </section>
+
+  <section id="call-for-papers" class="section">
+    <h2>Call for Papers</h2>
+    <p>We invite the submission of high-quality full papers that are original, unpublished, and not under review elsewhere at the time of submission. The first page of the paper should include the title, abstract, keywords representing the topic area, and the full names, affiliations, and email addresses of all authors.
+
+All accepted papers will be included in the conference proceedings. Submissions must be in English and adhere to the standard conference format, including graphs, images, and special formatting arranged as intended for final publication. Only printable PDF submissions will be considered.
+
+Each submission will undergo a rigorous peer review by at least two independent reviewers from the Conference Review Board. Papers will be evaluated based on originality, technical and/or research content, accuracy, relevance to the conference themes, contributions, and clarity.
+
+Important Note: Authors are responsible for obtaining necessary permissions from the previous publisher(s) for any reused material (text, figures, tables, etc.) and must include proof of these permissions with their submission.
+
+At least one author of each accepted paper is required to register for the conference. Each registration covers one accepted paper. Please note that the ICNGC-2025 Organizing Committee reserves the right to exclude any paper from the proceedings if it is not presented at the conference. We invite submissions in the following areas:</p>
+    <ul>
+      <li>Quantum Computing</li>
+      <li>Artificial Intelligence and Machine Learning</li>
+      <li>Edge Computing and IoT</li>
+      <li>Cybersecurity and Privacy</li>
+      <li>Cloud Computing and Distributed Systems</li>
+      <li>Green Computing and Sustainability</li>
+      <li>Blockchain and Decentralized Computing</li>
+      <li>High Performance Computing</li>
+      <li>Green Computing and Sustainability</li>
+    </ul>
+    <div class="submission-form">
+      <h3>Paper Submission</h3>
+      <div id="submissionAlert" class="alert"></div>
+      <form id="paperSubmissionForm">
+        <div class="form-group">
+          <h4>Author Details</h4>
+          <div id="authors-container">
+            <div class="author-widget">
+              <h5>Author 1 (Corresponding Author)</h5>
+              <div class="author-fields">
+                <div class="form-subgroup">
+                  <label for="author1-name">Full Name *</label>
+                  <input type="text" id="author1-name" name="author1-name" required />
+                </div>
+                <div class="form-subgroup">
+                  <label for="author1-affiliation">Affiliation *</label>
+                  <input type="text" id="author1-affiliation" name="author1-affiliation" required />
+                </div>
+                <div class="form-subgroup">
+                  <label for="author1-email">Email *</label>
+                  <input type="email" id="author1-email" name="author1-email" required />
+                </div>
+                <div class="form-subgroup">
+                  <label for="author1-phone">Contact Number</label>
+                  <input type="tel" id="author1-phone" name="author1-phone" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="add-author" class="secondary-btn">+ Add Co-author</button>
+        </div>
+        <div class="form-group">
+          <label for="abstract">Abstract *</label>
+          <textarea id="abstract" name="abstract" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="paper">Paper PDF * (Max 10MB)</label>
+          <input type="file" id="paper" name="paper" required />
+        </div>
+        <button type="submit" class="submit-btn">Submit Paper</button>
+      </form>
+      
+</div>
+<script>document.addEventListener("DOMContentLoaded", () => {
+  const paperSubmissionForm = document.getElementById("paperSubmissionForm");
+  const authorsContainer = document.getElementById("authors-container");
+  const addAuthorButton = document.getElementById("add-author");
+
+  // Handle adding a new co-author dynamically
+  let authorCount = 1;
+  addAuthorButton.addEventListener("click", () => {
+    authorCount++;
+    const newAuthorWidget = document.createElement("div");
+    newAuthorWidget.classList.add("author-widget");
+    newAuthorWidget.innerHTML = `
+      <h5>Author ${authorCount}</h5>
+      <div class="author-fields">
+        <div class="form-subgroup">
+          <label for="author${authorCount}-name">Full Name *</label>
+          <input type="text" id="author${authorCount}-name" name="author${authorCount}-name" required />
+        </div>
+        <div class="form-subgroup">
+          <label for="author${authorCount}-affiliation">Affiliation *</label>
+          <input type="text" id="author${authorCount}-affiliation" name="author${authorCount}-affiliation" required />
+        </div>
+        <div class="form-subgroup">
+          <label for="author${authorCount}-email">Email *</label>
+          <input type="email" id="author${authorCount}-email" name="author${authorCount}-email" required />
+        </div>
+        <div class="form-subgroup">
+          <label for="author${authorCount}-phone">Contact Number</label>
+          <input type="tel" id="author${authorCount}-phone" name="author${authorCount}-phone" />
+        </div>
+      </div>
+    `;
+    authorsContainer.appendChild(newAuthorWidget);
+  });
+
+  paperSubmissionForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(paperSubmissionForm);
+
+    // Extract author details from the form
+    const authors = [];
+    for (let i = 0; i < authorCount; i++) {  
+      const name = data.get(`author${i + 1}-name`);
+      const affiliation = data.get(`author${i + 1}-affiliation`);
+      const email = data.get(`author${i + 1}-email`);
+      const phone = data.get(`author${i + 1}-phone`);
+      
+      authors.push({
+        name,
+        affiliation,
+        email,
+        phone: phone || "",
+      });
+    }
+
+    const formData = new FormData();
+    formData.append("authors", JSON.stringify(authors));
+    formData.append("abstract", data.get("abstract"));
+    formData.append("paper", data.get("paper"));
+
+    try {
+      const response = await fetch("http://localhost:5000/submit-paper", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert("Paper submitted successfully!");
+        paperSubmissionForm.reset();
+      } else {
+        alert(result.message || "Paper submission failed.");
+      }
+    } catch (error) {
+      console.error("Error submitting paper:", error);
+      alert("An error occurred during paper submission.");
+    }
+  });
+});
+
+</script>
+
+      
+     
+      
+    </div>
+  </section>
+
+  <section id="important-dates" class="section important-dates">
+    <h2>Important Dates</h2>
+    <div class="date-item">
+      <span>Paper Submission Deadline:</span>
+      <span>February 15, 2025</span>
+    </div>
+    <div class="date-item">
+      <span>Notification of Acceptance:</span>
+      <span>March 15, 2025</span>
+    </div>
+    <div class="date-item">
+      <span>Camera-ready Submission:</span>
+      <span>March 31, 2025</span>
+    </div>
+    <div class="date-item">
+      <span>Conference Registration:</span>
+      <span>March 25, 2025</span>
+    </div>
+    <div class="date-item">
+      <span>Conference Dates:</span>
+      <span>April 12-13, 2025</span>
+    </div>
+  </section>
+
+  <section id="registration" class="section">
+    <h2>Conference Registration</h2>
+    <div class="registration-info">
+      <h3>Registration Fees</h3>
+      
+      <div class="fee-table">
+        <div class="fee-row">
+          <div class="fee-category">Student Participants (National)</div>
+          <div class="fee-amount"> ₹6,500 INR</div>
+          </div>
+          <div class="fee-row">
+          <div class="fee-category">Academia Participants (National)</div>
+          <div class="fee-amount">₹7,500 INR</div>
+        </div>
+          <div class="fee-row">
+          <div class="fee-category">Industry Participants (National)</div>
+          <div class="fee-amount">₹9,000 INR</div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-category">Conference Attendee (National)</div>
+          <div class="fee-amount">₹3,000 INR</div>
+        </div>
+          <div class="fee-row">
+          <div class="fee-category">Student Participants (International)</div>
+          <div class="fee-amount">$250 USD</div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-category">Academia Participants (International)</div>
+          <div class="fee-amount"> $350 USD</div>
+        </div>
+          <div class="fee-row">
+          <div class="fee-category">Industry Participants (International)</div>
+          <div class="fee-amount">$500 USD</div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-category">Conference Attendee (International)</div>
+          <div class="fee-amount">$150 USD</div>
+        </div>
+    </div>
+
+ <p> Note: The conference registration fees includes paper publication charges, conference kit and lunch to the registered participant. For paper publication, atleast one author of the paper is required to register. </p>     
+      <div class="registration-form">
+        <h3>Registration Form</h3>
+        <div id="registrationAlert" class="alert"></div>
+        <form id="conferenceRegistrationForm">
+          <div class="form-group">
+            <label for="reg-fullName">Full Name *</label>
+            <input type="text" id="reg-fullname" name="fullName" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-email">Email Address *</label>
+            <input type="email" id="reg-email" name="email" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-affiliation">Institution/Organization *</label>
+            <input type="text" id="reg-affiliation" name="affiliation" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-category">Registration Category *</label>
+            <select id="reg-category" name="category" required>
+              <option value="">Select Category</option>
+              <option value="student-national">Student National</option>
+              <option value="academia-national">Academia National</option>
+              <option value="industry-national">Industry National</option>
+              <option value="participant-national">Attendee National</option>
+              <option value="student-international">Student International</option>
+              <option value="academia-international">Academia International</option>
+              <option value="industry-international">Industry International</option>
+              <option value="participant-international">Attendee International</option>
+            </select>
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-paper-id">Paper ID (if applicable)</label>
+            <input type="text" id="reg-paper-id" name="paperId" />
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-phone">Contact Number *</label>
+            <input type="tel" id="reg-phone" name="phone" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="reg-address">Mailing Address *</label>
+            <textarea id="reg-address" name="address" rows="3" required></textarea>
+          </div>
+
+          <div class="form-subgroup">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+        
+          <button type="submit" class="submit-btn">
+            Register Now
+            <span class="loading-spinner"></span>
+          </button>
+        </form>
+        
+
+        
+      </div>
+    </div>
+  </section>
+
+  <section id="committee" class="section">
+    <h2>Committee</h2>
+    <div class="committee-grid">
+      <div class="committee-member">
+        <h3>Prof. Radu Prodan</h3>
+        <p class="committee-role">General Chair</p>
+        <p>University of Klagenfurt, Austria</p>
+      </div>
+      <div class="committee-member">
+        <h3>Dr. Khang Wen Goh</h3>
+        <p class="committee-role">Program Chair</p>
+        <p>INTI Internatioanl University, Malaysia</p>
+      </div>
+      <div class="committee-member">
+        <h3>Dr. Xiao-Zhi-Gao</h3>
+        <p class="committee-role">Technical Program Committee Chair</p>
+        <p>University of Eastern Finland, Finland</p>
+      </div>
+      <div class="committee-member">
+        <h3>Dr. Shajulin Benedict</h3>
+        <p class="committee-role">Publications Chair</p>
+        <p>IIIT, Kottayam, India</p>
+      </div>
+      <div class="committee-member">
+        <h3>Dr. Saurav Nanda</h3>
+        <p class="committee-role">Workshop Chair</p>
+        <p>Synopsis Inc, USA</p>
+      </div>
+      <div class="committee-member">
+        <h3>Dr. Charu Gupta</h3>
+        <p class="committee-role">Local Arrangements Chair</p>
+        <p>BPIT, New Delhi, India</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="speakers" class="section">
+    <h2>Technical Program Committee</h2>
+    <div class="speakers-grid">
+<p>Dr. Shajulin Benedict, IIIT Kottayam, India </p>
+<p>Prof. Deepali Virmani, Vivekanand Institute of Professional Studies, New Delhi, India </p>
+<p>Dr. Vladislav Kashanskiy, Eteronix, Austria </p>      
+<p>Prof. Deepak Prashar, Lovely Professional University, India </p>
+<p>Dr. Rahul Malik, Galgotia University, India </p>
+<p>Dr. Ashish K. Luhach, PNG University of Technology, Papua New Guinea</p>
+<p> Dr. Sahil Verma, Chandigarh University, Punjab, India </p>
+<p>Dr. Kavita, Uttaranchal University, Uttaranchal, India </p>
+<p>Dr. Chandra Prakash, National Institute of Technology, Surat, India </p>
+<p> Dr. Prateek Agrawal, Lovely Professional University, India</p>
+<p>Dr. Surjeet Dalal, Amity University, Haryana, India </p>
+<p>Dr. Akshat Agrawal, Amity University, India</p>
+<p>Dr. Dimple Nagpal, Lovely Professional University, Punjab, India </p>
+<p>Dr. Usha Mittal, Lovely Professional University, Punjab, India </p> 
+<p>Dr. Vishu Madaan, Lovely Professional University, Punjab, India </p>
+<p>Dr. Seyedasaleh, University of Klagenfurt, Austria </p>
+<p>Dr. Reza Farahani, University of Klagenfurt, Austria </p>
+<p> Dr. Ashwani Kumar, Bennett University, India</p>
+<p> Dr. Pawan Kumar, Sharda University, India</p>
+    </div>
+  </section>
+
+  <section id="venue" class="section">
+    <h2>Venue</h2>
+    <p>The conference will be held at Dharmshala, Himachal Pradesh, India. More details will be updated shortly.</p>
+  </section>
+</div>
+<!-- Registration Form Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const registrationForm = document.getElementById("conferenceRegistrationForm");
+  
+    registrationForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      // Collect form data
+      const formData = new FormData(registrationForm);
+      const data = Object.fromEntries(formData.entries());
+      console.log(data);
+      // Check if the password field is provided
+      if (!data.password || data.password.trim() === "") {
+        alert("Password is required!");
+        return;
+      }
+  
+      try {
+        // Use the correct local URL (http://localhost:5000/register)
+        const response = await fetch("http://localhost:5000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+  
+        const result = await response.json();
+        if (result.success) {
+          alert("Registration successful!");
+          registrationForm.reset();
+        } else {
+          alert(result.message || "Registration failed.");
+        }
+      } catch (error) {
+        console.error("Error registering:", error);
+        alert("An error occurred during registration.");
+      }
+    });
+  });
+  </script>
+  
+  
+  <!-- Paper Submission Form Script -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const paperSubmissionForm = document.getElementById("paperSubmissionForm");
+    
+    paperSubmissionForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(paperSubmissionForm);
+     
+      const formData = Object.fromEntries(data.entries());
+      console.log(formData);
+      try {
+        // Use the correct local URL (http://localhost:5000/submit-paper)
+        const response = await fetch("http://localhost:5000/submit-paper", {
+          method: "POST",
+          body: formData, // FormData already handles file uploads
+        });
+  
+        const result = await response.json();
+        if (result.success) {
+          alert("Paper submitted successfully!");
+          paperSubmissionForm.reset();
+        } else {
+          alert(result.message || "Paper submission failed.");
+        }
+      } catch (error) {
+        console.error("Error submitting paper:", error);
+        alert("An error occurred during paper submission.");
+      }
+    });
+  });
+  </script>
+  
+</body>
+</html>
