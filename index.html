@@ -524,7 +524,7 @@ At least one author of each accepted paper is required to register for the confe
     formData.append("paper", data.get("paper"));
 
     try {
-      const response = await fetch("http://localhost:5000/submit-paper", {
+      const response = await fetch("https://icngc2025.onrender.com/submit-paper", {
         method: "POST",
         body: formData,
       });
@@ -768,7 +768,7 @@ At least one author of each accepted paper is required to register for the confe
   
       try {
         // Use the correct local URL (http://localhost:5000/register)
-        const response = await fetch("http://localhost:5000/register", {
+        const response = await fetch("https://icngc2025.onrender.com/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
