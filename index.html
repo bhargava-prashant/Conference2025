@@ -97,6 +97,12 @@
     border-bottom: 2px solid var(--secondary);
     padding-bottom: 0.5rem;
   }
+  /* .section h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+  } */
 
   .important-dates {
     background: var(--light);
@@ -372,6 +378,8 @@
   <ul>
     <li><a onclick="scrollToSection('about')">About</a></li>
     <li><a onclick="scrollToSection('call-for-papers')">Call for Papers</a></li>
+    <li><a onclick="scrollToSection('workshop')">Workshop</a></li>
+    <li><a onclick="scrollToSection('paper-submission')">Paper Submission</a></li>
     <li><a onclick="scrollToSection('important-dates')">Important Dates</a></li>
     <li><a onclick="scrollToSection('registration')">Registration</a></li>
     <li><a onclick="scrollToSection('committee')">Committee</a></li>
@@ -419,8 +427,39 @@ At least one author of each accepted paper is required to register for the confe
       <li>High Performance Computing</li>
       <li>Green Computing and Sustainability</li>
     </ul>
+
+  </section>
+
+  <section id="workshop" class="section">
+    <h2>Workshop</h2>
+    <h3>ACI 2025 (workshop on Advances in Computational Intelligence)</h3>
+    <p>Proceedings of the Workshop on Advances in Computational Intelligence (ACI 2025) co-located with the 2nd International Conference on Next Generation Computing (ICNGC 2025)</p>
+    <p>Computational Intelligence (CI) is a rapidly evolving field that encompasses a wide range of techniques and methodologies inspired by natural intelligence. It has found applications in various domains, including engineering, medicine, finance, and artificial intelligence. This workshop aims to bring together researchers, scientists, and practitioners to discuss the latest advancements in CI and its applications.
+
+      We invite original and high quality research works which are not submitted/published somewhere else. A wide range of topics related to computational intelligence and their applications are welcomed: 
+      Neural Networks, Deep learning, Fuzzy Systems, Pattern recognition, Genetic algorithms, Evolutionary programming, Machine learning, Natural language processing, Hybrid Intelligence, IOT etc.</p>
+    
+      <p><b>All accepted, registered and presented papers will be considered for publication in scopus indexed proceedings.</b></p>
+      <div class="committee-grid">
+        <div class="committee-member">
+          <h3>Dr. Prateek Agrawal</h3>
+          <p class="committee-role">Workshop Chair</p>
+          <p>Lovely Professional Universtiy, India</p>
+        </div>
+        <div class="committee-member">
+          <h3>Dr. Vishu Madaan</h3>
+          <p class="committee-role">Workshop Chair</p>
+          <p>Lovely Professional Universtiy, India</p>
+        </div>
+      </div>
+  </section>
+
+
+  <section id="paper-submission" class="section">
+    <h2>Paper Submission</h2>
+    <p>Each manuscript must be written in double Column template layout. Regular paper length should not be exceeded to 08 pages. Use Times New Roman 10-point font for the main text (and 12-point font for headings and sub-headings). Maintain consistent margins: top/bottom 0.75 in, left/right 0.625 in. Each column should be 3.5 inches wide with a 0.25-inch gap. Place figures and tables within the column width or span across both columns if necessary. Follow the IEEE referencing style. Cite references within the text using in IEEE style i.e. [1,2] or [1] etc. Thoroughly proofread your paper for grammar, spelling, and formatting errors. The manuscript having similarity index on Turnitin (with six word limit excluding references) be more than 10% and with max 3% similarity from a single source, will not be considered for publication.</p>
     <div class="submission-form">
-      <h3>Paper Submission</h3>
+      
       <div id="submissionAlert" class="alert"></div>
       <form id="paperSubmissionForm">
         <div class="form-group">
@@ -545,11 +584,11 @@ At least one author of each accepted paper is required to register for the confe
 
 </script>
 
-      
+      </section>
      
       
     </div>
-  </section>
+  
 
   <section id="important-dates" class="section important-dates">
     <h2>Important Dates</h2>
@@ -667,7 +706,7 @@ At least one author of each accepted paper is required to register for the confe
 
           <div class="form-subgroup">
             <label for="password">Password *</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" required /> (By Default "ACI")
           </div>
         
           <button type="submit" class="submit-btn">
